@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="과제를 기록하고 마감일과 완료 상태를 확인하는 학생용 학습 예제. 이 브라우저에만 저장됩니다.">
-<title>과제 수정 · 과제 체크 2일차</title>
+<title>수정과 검색 · 과제 체크 2일차</title>
 <style>
 :root{font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;color:#183c32;background:#f5f7f0;--ink:#183c32;--muted:#64786e;--line:#d4ded2;--green:#204d3b;--mint:#d9f1bd;--warn:#9c4435;color-scheme:light}
 *{box-sizing:border-box}body{margin:0}button,input{font:inherit}button,a,input{outline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #4b865d}button{cursor:pointer;min-height:48px;border:1px solid var(--line);border-radius:12px;padding:10px 16px;color:var(--ink);background:white}button:hover{background:#edf3e8}a{color:var(--green);text-underline-offset:4px}.wrap{max-width:1140px;margin:auto;padding:28px 28px 45px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:24px;border-bottom:1px solid var(--line)}.brand{display:flex;gap:10px;align-items:center;font-weight:800;font-size:18px}.brand svg{width:34px;height:34px}.top a{font-size:13px;padding:14px 0}.eyebrow{font:11px ui-monospace,monospace;letter-spacing:.15em;color:var(--muted);margin:0 0 15px}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:40px 0 30px}.hero h1{font-size:clamp(34px,4.4vw,54px);line-height:1.16;letter-spacing:-.055em;margin:0 0 13px}.hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.8}.badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;white-space:nowrap;border:1px solid #ccdbc3;padding:9px 13px;border-radius:50px;background:#edf4e5}.badge:before{content:"";width:7px;height:7px;background:#628640;border-radius:50%}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}.stat{border:1px solid var(--line);border-radius:18px;padding:20px 23px;background:#fff}.stat:first-child{background:var(--green);color:#f2f9eb;border-color:var(--green)}.stat span{font-size:13px;display:block;margin-bottom:10px}.stat strong{font:600 35px ui-monospace,monospace;letter-spacing:-.05em}.stat small{font-size:12px;margin-left:7px;color:inherit}.stat.overdue strong{color:var(--warn)}.workspace{display:grid;grid-template-columns:320px minmax(0,1fr);gap:23px;align-items:start}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:25px}.panel h2,.list-head h2{font-size:20px;letter-spacing:-.035em;margin:0 0 7px}.panel .intro{font-size:13px;line-height:1.8;color:var(--muted);margin:0 0 24px}.field{margin-bottom:19px}.field label{font-size:13px;display:block;margin-bottom:8px;font-weight:650}.field label span{font-size:11px;font-weight:400;color:var(--muted);margin-left:5px}.field input{width:100%;min-height:48px;border:1px solid #b8c9ba;border-radius:10px;padding:11px 12px;font-size:1rem;color:var(--ink);background:#fcfdf9;min-width:0}.field input:user-invalid,.field input[aria-invalid=true]{border-color:var(--warn);background:#fff6f1}.error{display:none;font-size:12px;color:var(--warn);line-height:1.6;margin:7px 0 0}.field input:user-invalid+.error,.field input[aria-invalid=true]+.error{display:block}.primary{background:var(--green);border-color:var(--green);color:#f3ffe8;width:100%;font-weight:700}.primary:hover{background:#153e2d}.privacy{font-size:12px;color:var(--muted);line-height:1.8;margin:18px 0 0}.list-area{min-width:0}.list-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 0 18px}.list-head p{font-size:12px;color:var(--muted);margin:0}.sample{background:#e6efdc;border-color:#c8d9bd;font-size:12px;white-space:nowrap}.filters{display:flex;gap:7px;padding:0;margin:0 0 15px;border:0;min-width:0}.filters legend{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}.filters label{cursor:pointer;position:relative;display:flex;align-items:center;gap:7px;min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-size:13px;background:#fff}.filters label:has(input:checked){background:#e1efd6;border-color:#88a373;font-weight:700}.filters input{accent-color:var(--green);margin:0;width:16px;height:16px}.tasks{padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;margin:0}.task{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px 17px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;align-items:center}.task-check{display:flex;gap:13px;align-items:center;min-height:48px;cursor:pointer;min-width:0}.task-check input{width:22px;height:22px;flex:0 0 22px;accent-color:var(--green);margin:0}.task-title{font-size:16px;line-height:1.5;font-weight:650;overflow-wrap:anywhere}.task.done .task-title{text-decoration:line-through;color:#7d8a80;font-weight:400}.task-meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;padding-left:35px;font-size:11px;color:var(--muted);align-items:center}.subject{background:#eef2e9;padding:5px 8px;border-radius:6px}.due{padding:5px 8px;background:#f0f4ea;border-radius:6px}.due.late{color:#963d30;background:#fff0e8}.due.today{color:#5a6b1c;background:#f1f2d7}.delete{font-size:12px;border-color:transparent;color:#768078;padding-inline:10px}.empty{border:1px dashed #c3d2bd;border-radius:18px;padding:50px 25px;text-align:center;background:#f0f5e9}.empty strong{display:block;font-size:18px;margin-bottom:10px}.empty p{font-size:13px;line-height:1.8;color:var(--muted);margin:0}.list-foot{font-size:11px;color:var(--muted);line-height:1.8;margin:15px 0 0}.notice{display:flex;gap:15px;align-items:center;justify-content:space-between;min-height:50px;margin-top:18px;padding:10px 15px;border-radius:12px;background:#e1efd6;font-size:13px;line-height:1.6}.notice:has(span:empty){display:none}.notice button{min-height:48px;font-size:12px;white-space:nowrap}.storage-warning{font-size:13px;line-height:1.8;padding:15px 18px;margin:0 0 22px;background:#fff0df;border:1px solid #e4c39e;border-radius:12px}.storage-warning[hidden],button[hidden],.empty[hidden]{display:none}footer{display:flex;justify-content:space-between;gap:20px;margin-top:35px;padding-top:20px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.9}footer p{margin:0}.skip{position:absolute;top:-100px;left:20px}.skip:focus{top:10px;padding:10px;background:white;z-index:2}
@@ -12,6 +12,7 @@
 @media(prefers-reduced-motion:no-preference){button{transition:background .15s ease}}
 .task-actions{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}.edit,.delete{font-size:12px;padding-inline:10px}.cancel{width:100%;margin-top:10px}.panel.editing{border-color:#628640;background:#f5faef}.task-actions button{min-height:48px}
 @media(max-width:480px){.task-actions{flex-direction:column}.task{gap:8px}.task-meta{padding-left:0}}
+.search-field{margin-bottom:16px}.search-field label{display:block;font-size:13px;font-weight:650;margin-bottom:8px}.search-row{display:flex;gap:8px}.search-row input{min-width:0;flex:1;min-height:48px;border:1px solid #b8c9ba;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink)}button:disabled{opacity:.55;cursor:default}
 </style>
 </head>
 <body>
@@ -35,6 +36,7 @@
 <p class="privacy">이 브라우저에만 저장돼요. 다른 기기와 자동으로 공유되지 않으며, 사이트 데이터를 지우면 목록도 지워져요.</p>
 </section>
 <section class="list-area" aria-labelledby="taskListTitle"><div class="list-head"><div><h2 id="taskListTitle">나의 과제</h2><p id="todayLabel"></p></div><button class="sample" type="button" id="sampleBtn">예제 3개 넣기</button></div>
+<div class="search-field"><label for="taskSearch">제목·과목 검색</label><div class="search-row"><input id="taskSearch" type="search" placeholder="예: 감상문 또는 국어" autocomplete="off" aria-controls="tasks"><button id="clearSearch" type="button" disabled>지우기</button></div></div>
 <fieldset class="filters"><legend>과제 표시 필터</legend><label><input type="radio" name="filter" value="all" id="filterAll" checked>전체</label><label><input type="radio" name="filter" value="open" id="filterOpen">미완료</label><label><input type="radio" name="filter" value="done" id="filterDone">완료</label></fieldset>
 <ul class="tasks" id="tasks" aria-label="과제 목록"></ul>
 <div class="empty" id="empty"><strong id="emptyTitle">아직 등록한 과제가 없어요.</strong><p id="emptyMessage">왼쪽에서 첫 과제를 추가하거나<br>예제 3개로 먼저 둘러보세요.</p></div>
@@ -111,7 +113,9 @@ function render() {
   $('#lateCount').textContent=open.filter(item=>compareDates(item.due,today)<0).length;
   $('#todayLabel').textContent=`오늘 ${labelDate(today)} · 미완료 먼저, 마감일순`;
   const filter=document.querySelector('[name=filter]:checked').value;
-  const shown=items.filter(item=>filter==='all'||(filter==='done'?item.done:!item.done)).sort((a,b)=>Number(a.done)-Number(b.done)||compareDates(a.due,b.due)||a.createdAt-b.createdAt);
+  const query=$('#taskSearch').value.trim().toLocaleLowerCase();
+  $('#clearSearch').disabled=$('#taskSearch').value.length===0;
+  const shown=items.filter(item=>(filter==='all'||(filter==='done'?item.done:!item.done))&&(!query||item.title.toLocaleLowerCase().includes(query)||item.subject.toLocaleLowerCase().includes(query))).sort((a,b)=>Number(a.done)-Number(b.done)||compareDates(a.due,b.due)||a.createdAt-b.createdAt);
   const list=$('#tasks'); list.replaceChildren();
   for (const item of shown) {
     const row=make('li','task'+(item.done?' done':''));
@@ -137,8 +141,8 @@ function render() {
     meta.append(due); actions.append(edit,remove); row.append(label,actions,meta); list.append(row);
   }
   $('#empty').hidden=shown.length>0;
-  $('#emptyTitle').textContent=items.length===0?'아직 등록한 과제가 없어요.':filter==='done'?'완료한 과제가 아직 없어요.':'남은 과제가 없어요!';
-  $('#emptyMessage').textContent=items.length===0?'새 과제를 추가하거나 예제 3개로 먼저 둘러보세요.':filter==='done'?'끝낸 과제의 체크박스를 눌러보세요.':'전체 목록에서 과제를 확인하거나 새 과제를 추가해 보세요.';
+  $('#emptyTitle').textContent=query?'검색 결과가 없어요.':items.length===0?'아직 등록한 과제가 없어요.':filter==='done'?'완료한 과제가 아직 없어요.':'남은 과제가 없어요!';
+  $('#emptyMessage').textContent=query?'검색어를 바꾸거나 완료 필터를 확인해 주세요.':items.length===0?'새 과제를 추가하거나 예제 3개로 먼저 둘러보세요.':filter==='done'?'끝낸 과제의 체크박스를 눌러보세요.':'전체 목록에서 과제를 확인하거나 새 과제를 추가해 보세요.';
   $('#listSummary').textContent=`전체 ${items.length}개 · 완료 ${done}개 · 현재 ${shown.length}개 표시`;
   $('#sampleBtn').disabled=['demo-1','demo-2','demo-3'].every(id=>items.some(item=>item.id===id));
 }
@@ -185,15 +189,17 @@ form.addEventListener('submit',event=>{
   }else{
     items.push({id:crypto.randomUUID?crypto.randomUUID():`task-${Date.now()}-${Math.random().toString(36).slice(2)}`,title:title.value.trim(),subject:subject.value.trim(),due:due.value,done:false,createdAt:Date.now()});
   }
-  save(); $('#filterAll').checked=true; resetEditor(); render();
+  save(); $('#filterAll').checked=true; $('#taskSearch').value=''; resetEditor(); render();
   title.focus(); message(persistent?(wasEditing?'과제 변경을 저장했어요.':'과제를 추가하고 이 브라우저에 저장했어요.'):'변경했어요. 현재 임시 모드입니다.');
 });
+$('#taskSearch').addEventListener('input',render);
+$('#clearSearch').addEventListener('click',()=>{$('#taskSearch').value='';render();$('#taskSearch').focus();});
 document.querySelectorAll('[name=filter]').forEach(input=>input.addEventListener('change',render));
-$('#undoBtn').addEventListener('click',()=>{if(!removed)return;const restored=removed.item;items.splice(removed.index,0,restored);removed=null;save();$('#filterAll').checked=true;render();$('#undoBtn').hidden=true;focusTask(restored.id);message('삭제한 과제를 되돌렸어요.');});
+$('#undoBtn').addEventListener('click',()=>{if(!removed)return;const restored=removed.item;items.splice(removed.index,0,restored);removed=null;save();$('#filterAll').checked=true;$('#taskSearch').value='';render();$('#undoBtn').hidden=true;focusTask(restored.id);message('삭제한 과제를 되돌렸어요.');});
 $('#sampleBtn').addEventListener('click',()=>{
   const samples=[['demo-1','국어 독서 감상문','국어',0],['demo-2','수학 연습문제 5개','수학',1],['demo-3','영어 단어 복습','영어',-1]];
   samples.forEach(([id,title,subject,offset],index)=>{if(!items.some(item=>item.id===id))items.push({id,title,subject,due:shiftToday(offset),done:false,createdAt:Date.now()+index});});
-  save();$('#filterAll').checked=true;render();message('가상 과제 3개를 넣었어요. 오늘 마감과 기한 지남을 비교해 보세요.');
+  save();$('#filterAll').checked=true;$('#taskSearch').value='';render();message('가상 과제 3개를 넣었어요. 오늘 마감과 기한 지남을 비교해 보세요.');
 });
 load(); $('#taskDue').value=hasTemporal?Temporal.Now.plainDateISO().toString():dateValue(); render();
 $('#inputFields').disabled=false;
