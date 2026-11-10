@@ -137,11 +137,11 @@ function render() {
 }
 
 // 4. 네이티브 폼 검증과 접근성 상태를 함께 사용합니다.
-const form=$('#taskForm');
+const form=$('#taskForm'), interacted=new WeakSet();
 function syncField(input) { if (input.validity.valid)input.removeAttribute('aria-invalid'); else input.setAttribute('aria-invalid','true'); }
-form.addEventListener('invalid',event=>syncField(event.target),true);
-form.addEventListener('blur',event=>{if(event.target.matches('input'))syncField(event.target);},true);
-form.addEventListener('input',event=>{if(event.target.matches('input')){event.target.setCustomValidity(''); if(event.target.validity.valid)event.target.removeAttribute('aria-invalid');}});
+form.addEventListener('invalid',event=>{interacted.add(event.target);syncField(event.target);},true);
+form.addEventListener('blur',event=>{if(event.target.matches('input')&&interacted.has(event.target))syncField(event.target);},true);
+form.addEventListener('input',event=>{if(event.target.matches('input')){interacted.add(event.target);event.target.setCustomValidity(''); if(event.target.validity.valid)event.target.removeAttribute('aria-invalid');}});
 form.addEventListener('submit',event=>{
   event.preventDefault();
   const title=$('#taskTitle'),subject=$('#taskSubject'),due=$('#taskDue');
@@ -152,7 +152,7 @@ form.addEventListener('submit',event=>{
   if (!form.reportValidity()) return;
   items.push({id:crypto.randomUUID?crypto.randomUUID():`task-${Date.now()}-${Math.random().toString(36).slice(2)}`,title:title.value.trim(),subject:subject.value.trim(),due:due.value,done:false,createdAt:Date.now()});
   save(); $('#filterAll').checked=true; render();
-  form.reset(); [title,subject,due].forEach(input=>input.removeAttribute('aria-invalid')); due.value=hasTemporal?Temporal.Now.plainDateISO().toString():dateValue();
+  form.reset(); [title,subject,due].forEach(input=>{input.removeAttribute('aria-invalid');interacted.delete(input);}); due.value=hasTemporal?Temporal.Now.plainDateISO().toString():dateValue();
   title.focus(); message(persistent?'과제를 추가하고 이 브라우저에 저장했어요.':'과제를 추가했어요. 현재 임시 모드입니다.');
 });
 document.querySelectorAll('[name=filter]').forEach(input=>input.addEventListener('change',render));
